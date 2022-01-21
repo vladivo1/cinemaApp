@@ -23,8 +23,8 @@ public class Client {
     private String lastName;
     private String email;
     private Date dateOfBirth;
-    private int cartNumber;
-    private int number;
+    private long cartNumber;
+    private long number;
 
 
 }
