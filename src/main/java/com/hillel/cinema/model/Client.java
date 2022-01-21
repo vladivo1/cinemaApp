@@ -1,14 +1,14 @@
 package com.hillel.cinema.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 import java.util.Date;
+import java.util.HashSet;
+import java.util.Set;
 
 @Data
 @Entity
@@ -26,5 +26,7 @@ public class Client {
     private long cartNumber;
     private long number;
 
-
+    @JsonIgnore
+    @OneToMany(mappedBy = "client")
+    private Set<Ticket> tickets = new HashSet<>();
 }

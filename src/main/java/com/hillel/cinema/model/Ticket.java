@@ -3,11 +3,9 @@ package com.hillel.cinema.model;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 @Data
 @AllArgsConstructor
@@ -21,8 +19,14 @@ public class Ticket {
     private double cost;
     private String movieName;
     private double date;
-    private String client;
     private double time;
     private int room;
+    @ManyToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "client_id", referencedColumnName = "clientId")
+    private Client client;
+
+    public void assingClient(Client client) {
+        this.client = client;
+    }
 
 }
