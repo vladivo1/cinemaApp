@@ -25,6 +25,6 @@ public class Schedule {
     @ManyToOne
     @JoinColumn(name = "room_id")
     private Room room;
-    @Column(name = "show_time")
-    private LocalDateTime showTime;
+    @Column(name = "movie_time")
+    private LocalDateTime movieTime;
 }
