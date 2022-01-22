@@ -1,4 +1,30 @@
 package com.hillel.cinema.model;
 
+import java.time.LocalDateTime;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.Table;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
+@Entity
+@Table(name = "schedule")
+@Data
+@NoArgsConstructor
 public class Schedule {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+    @ManyToOne
+    private Movie movie;
+    @ManyToOne
+    @JoinColumn(name = "room_id")
+    private Room room;
+    @Column(name = "show_time")
+    private LocalDateTime showTime;
 }
