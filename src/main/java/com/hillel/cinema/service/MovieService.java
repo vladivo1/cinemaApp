@@ -1,6 +1,5 @@
 package com.hillel.cinema.service;
 
-import com.hillel.cinema.exception.EntityAlreadyExistException;
 import com.hillel.cinema.exception.EntityNotFoundException;
 import com.hillel.cinema.model.Movie;
 import com.hillel.cinema.repository.MovieRepository;
@@ -12,11 +11,12 @@ import java.util.List;
 public class MovieService {
 
     private final MovieRepository movieRepository;
-    public MovieService (MovieRepository movieRepository) {
+
+    public MovieService(MovieRepository movieRepository) {
         this.movieRepository = movieRepository;
     }
 
-    public Movie saveMovie(Movie movie)  {
+    public Movie saveMovie(Movie movie) {
         return movieRepository.save(movie);
 
     }
@@ -31,12 +31,13 @@ public class MovieService {
     }
 
     public Movie getMovieByTitle(String title) throws EntityNotFoundException {
-        if (movieRepository.findMovieByTitle(title) == null)
+        Movie movie = movieRepository.findMovieByTitle(title);
+        if (title == null)
             throw new EntityNotFoundException("Фильма с таким названием не существует!");
-        return movieRepository.findMovieByTitle(title);
+        return movie;
     }
 
-    public Movie updateMovieById (Long id, Movie movie) throws EntityNotFoundException {
+    public Movie updateMovieById(Long id, Movie movie) throws EntityNotFoundException {
         return movieRepository.findById(id)
                 .map(entity -> {
 
@@ -48,7 +49,7 @@ public class MovieService {
 
     }
 
-    public void deleteMovie (Long id) {
+    public void deleteMovie(Long id) {
         movieRepository.deleteById(id);
     }
 
