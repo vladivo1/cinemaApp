@@ -14,21 +14,22 @@ import java.util.List;
 public class ClientController {
 
     private final ClientService clientService;
-    public ClientController  (ClientService clientService) {
+
+    public ClientController(ClientService clientService) {
         this.clientService = clientService;
     }
 
     @PostMapping("/clients")
     @ResponseStatus(HttpStatus.CREATED)
-    public Client saveClient (@RequestBody Client client) throws UserAlreadyExistException {
-       return clientService.saveClient(client);
+    public Client saveClient(@RequestBody Client client) throws UserAlreadyExistException {
+        return clientService.saveClient(client);
 
     }
 
     @GetMapping("/clients/{id}")
     @ResponseStatus(HttpStatus.OK)
-        public Client getClientById(@PathVariable Long id) {
-            return clientService.getClientById(id);
+    public Client getClientById(@PathVariable Long id) {
+        return clientService.getClientById(id);
 
     }
 
@@ -41,8 +42,8 @@ public class ClientController {
 
     @PutMapping("/clients/{id}")
     @ResponseStatus(HttpStatus.OK)
-    public  Client updateClientById (@PathVariable ("id") Long id, @RequestBody Client client ) {
-        return clientService.updateClientById(id,client);
+    public Client updateClientById(@PathVariable("id") Long id, @RequestBody Client client) {
+        return clientService.updateClientById(id, client);
     }
 
     @DeleteMapping("/clients/{id}")
