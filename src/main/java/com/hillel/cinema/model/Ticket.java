@@ -6,26 +6,26 @@ import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 
+
+@Entity
+@Table(name = "tickets")
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-@Entity
-@Table(name = "tickets")
+
 public class Ticket {
+
     @Id
-    @GeneratedValue
+    @GeneratedValue (strategy = GenerationType.IDENTITY)
     private Long ticketId;
     private double cost;
     private String movieName;
     private double date;
     private double time;
     private int room;
+
     @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "client_id", referencedColumnName = "clientId")
     private Client client;
-
-    public void assingClient(Client client) {
-        this.client = client;
-    }
 
 }

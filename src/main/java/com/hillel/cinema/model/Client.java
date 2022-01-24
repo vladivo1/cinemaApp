@@ -10,21 +10,24 @@ import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
 
-@Data
+
 @Entity
+@Table(name = "clients")
+@Data
 @AllArgsConstructor
 @NoArgsConstructor
-@Table(name = "clients")
+
 public class Client {
+
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long clientId;
     private String firstName;
     private String lastName;
     private String email;
     private Date dateOfBirth;
-    private long cartNumber;
-    private long number;
+    private String cartNumber;
+    private String phoneNumber;
 
     @JsonIgnore
     @OneToMany(mappedBy = "client")
