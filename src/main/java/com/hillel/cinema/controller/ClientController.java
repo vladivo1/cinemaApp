@@ -1,6 +1,7 @@
 package com.hillel.cinema.controller;
 
 import com.hillel.cinema.exception.UserAlreadyExistException;
+import com.hillel.cinema.exception.UserNotFoundException;
 import com.hillel.cinema.model.Client;
 import com.hillel.cinema.service.ClientService;
 import org.springframework.http.HttpStatus;
@@ -28,7 +29,7 @@ public class ClientController {
 
     @GetMapping("/clients/{id}")
     @ResponseStatus(HttpStatus.OK)
-    public Client getClientById(@PathVariable Long id) {
+    public Client getClientById(@PathVariable Long id) throws UserNotFoundException {
         return clientService.getClientById(id);
 
     }

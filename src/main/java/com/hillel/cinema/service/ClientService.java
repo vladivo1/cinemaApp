@@ -1,6 +1,7 @@
 package com.hillel.cinema.service;
 
 import com.hillel.cinema.exception.UserAlreadyExistException;
+import com.hillel.cinema.exception.UserNotFoundException;
 import com.hillel.cinema.model.Client;
 import com.hillel.cinema.repository.ClientRepository;
 import org.springframework.stereotype.Service;
@@ -17,13 +18,11 @@ public class ClientService {
     }
 
     public Client saveClient(Client client) throws UserAlreadyExistException {
-        if (clientRepository.findByEmail(client.getEmail()) != null) {
+        if (clientRepository.findClientByEmail(client.getEmail()) != null)
             throw new UserAlreadyExistException("Пользователь с таким email уже существует");
-        }
-        else if (clientRepository.findByPhoneNumber(client.getPhoneNumber()) != null) {
+        else if (clientRepository.findClientByPhoneNumber(client.getPhoneNumber()) != null)
             throw new UserAlreadyExistException("Пользователь с таким номером телефона уже существует");
-        } else
-
+         else
         return clientRepository.save(client);
     }
 
@@ -31,9 +30,9 @@ public class ClientService {
         return clientRepository.findAll();
     }
 
-    public Client getClientById(Long id) {
+    public Client getClientById(Long id) throws UserNotFoundException {
         return clientRepository.findById(id)
-                .orElseThrow(() -> new EntityNotFoundException("Client with id " + id + " not found"));
+                .orElseThrow(() -> new UserNotFoundException("Client with id " + id + " not found"));
     }
 
     public Client updateClientById (Long id, Client client) {
@@ -52,9 +51,8 @@ public class ClientService {
 
     }
 
-    public Long deleteClient (Long id) {
+    public void deleteClient (Long id) {
          clientRepository.deleteById(id);
-         return id;
     }
 
 }
