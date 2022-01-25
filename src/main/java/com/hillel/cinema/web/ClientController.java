@@ -1,14 +1,12 @@
-package com.hillel.cinema.controller;
-
-import com.hillel.cinema.exception.EntityAlreadyExistException;
-import com.hillel.cinema.exception.EntityNotFoundException;
-import com.hillel.cinema.model.Client;
+package com.hillel.cinema.web;
+import com.hillel.cinema.domain.Client;
 import com.hillel.cinema.service.ClientService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+
 
 @RestController
 @RequestMapping("/api")
@@ -21,14 +19,14 @@ public class ClientController {
 
     @PostMapping("/clients")
     @ResponseStatus(HttpStatus.CREATED)
-    public Client saveClient(@RequestBody Client client) throws EntityAlreadyExistException {
+    public Client saveClient(@RequestBody Client client) {
         return clientService.saveClient(client);
 
     }
 
     @GetMapping("/clients/{id}")
     @ResponseStatus(HttpStatus.OK)
-    public Client getClientById(@PathVariable Long id) throws EntityNotFoundException {
+    public Client getClientById(@PathVariable Long id) {
         return clientService.getClientById(id);
 
     }
@@ -42,7 +40,7 @@ public class ClientController {
 
     @PutMapping("/clients/{id}")
     @ResponseStatus(HttpStatus.OK)
-    public Client updateClientById(@PathVariable("id") Long id, @RequestBody Client client) throws EntityNotFoundException {
+    public Client updateClientById(@PathVariable("id") Long id, @RequestBody Client client)  {
         return clientService.updateClientById(id, client);
     }
 

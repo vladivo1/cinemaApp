@@ -1,4 +1,4 @@
-package com.hillel.cinema.model;
+package com.hillel.cinema.domain;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -18,7 +18,7 @@ public class Room {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    private int roomNumber;
-    private int capacity;
+    private String roomNumber;
+    private String capacity;
     private String description;
 }

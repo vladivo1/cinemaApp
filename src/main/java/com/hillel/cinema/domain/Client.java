@@ -1,4 +1,4 @@
-package com.hillel.cinema.model;
+package com.hillel.cinema.domain;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
@@ -26,6 +26,7 @@ public class Client {
     private String lastName;
     private String email;
     private Date dateOfBirth;
+    // TODO: 25.01.2022 возможно будет обьект
     private String cartNumber;
     private String phoneNumber;
 

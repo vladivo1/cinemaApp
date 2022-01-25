@@ -1,7 +1,6 @@
 package com.hillel.cinema.service;
 
-import com.hillel.cinema.exception.EntityNotFoundException;
-import com.hillel.cinema.model.Room;
+import com.hillel.cinema.domain.Room;
 import com.hillel.cinema.repository.RoomRepository;
 import org.springframework.stereotype.Service;
 
@@ -24,19 +23,19 @@ public class RoomService {
         return roomRepository.findAll();
     }
 
-    public Room getRoomById(Long id) throws EntityNotFoundException {
+    public Room getRoomById(Long id) {
         return roomRepository.findById(id)
-                .orElseThrow(() -> new EntityNotFoundException("Зал с id " + id + " не найден"));
+                .orElseThrow(() -> new javax.persistence.EntityNotFoundException("Зал с id " + id + " не найден"));
     }
 
-    public Room getRoomByRoomNumber(int roomNumber) throws EntityNotFoundException {
+    public Room getRoomByRoomNumber(int roomNumber) {
         Room room = roomRepository.getRoomByRoomNumber(roomNumber);
         if (room == null)
-            throw new EntityNotFoundException("Зала с таким номером не существует!");
+            throw new javax.persistence.EntityNotFoundException("Зала с таким номером не существует!");
         return room;
     }
 
-    public Room updateRoom(Long id, Room room) throws EntityNotFoundException {
+    public Room updateRoom(Long id, Room room) {
         return roomRepository.findById(id)
                 .map(entity -> {
 
@@ -45,7 +44,7 @@ public class RoomService {
                     entity.setDescription(room.getDescription());
                     return roomRepository.save(entity);
                 })
-                .orElseThrow(() -> new EntityNotFoundException("Зал с id " + id + " не найден"));
+                .orElseThrow(() -> new javax.persistence.EntityNotFoundException("Зал с id " + id + " не найден"));
 
     }
 

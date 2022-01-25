@@ -1,4 +1,4 @@
-package com.hillel.cinema.model;
+package com.hillel.cinema.domain;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;

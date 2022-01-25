@@ -1,4 +1,4 @@
-package com.hillel.cinema.model;
+package com.hillel.cinema.domain;
 
 import java.time.LocalDateTime;
 import javax.persistence.Column;
@@ -24,11 +24,16 @@ public class Schedule {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+    // TODO: 25.01.2022 изменить на Data?
+    private String date;
     @ManyToOne
     private Movie movie;
+    // TODO: 25.01.2022 изменить на fk?
     @ManyToOne
     @JoinColumn(name = "room_id")
     private Room room;
+    // TODO: 25.01.2022 String or start and end?
     @Column(name = "movie_time")
     private LocalDateTime movieTime;
+
 }

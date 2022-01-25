@@ -1,10 +1,11 @@
-package com.hillel.cinema.model;
+package com.hillel.cinema.domain;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import java.time.LocalDateTime;
 
 
 @Entity
@@ -18,11 +19,11 @@ public class Ticket {
     @Id
     @GeneratedValue (strategy = GenerationType.IDENTITY)
     private Long ticketId;
-    private double cost;
+    private String cost;
     private String movieName;
-    private double date;
-    private double time;
-    private int room;
+    // TODO: 25.01.2022 Date and mb instant?
+    private LocalDateTime date;
+    private String room;
 
     @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "client_id", referencedColumnName = "clientId")

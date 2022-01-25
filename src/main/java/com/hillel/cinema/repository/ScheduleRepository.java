@@ -1,12 +1,14 @@
 package com.hillel.cinema.repository;
 
-import com.hillel.cinema.model.Movie;
-import com.hillel.cinema.model.Schedule;
+import com.hillel.cinema.domain.Movie;
+import com.hillel.cinema.domain.Schedule;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.stereotype.Repository;
 
 import java.time.LocalDateTime;
-
+@Repository
 public interface ScheduleRepository extends JpaRepository<Schedule, Long> {
-    public Schedule getScheduleByMovie (Movie movie);
-    public Schedule getScheduleByMovieTime (LocalDateTime movieTime);
+
+    Schedule getScheduleByMovie (Movie movie);
+    Schedule getScheduleByMovieTime (LocalDateTime movieTime);
 }

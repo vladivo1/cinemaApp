@@ -1,8 +1,7 @@
-package com.hillel.cinema.controller;
+package com.hillel.cinema.web;
 
-import com.hillel.cinema.exception.EntityNotFoundException;
-import com.hillel.cinema.model.Client;
-import com.hillel.cinema.model.Ticket;
+import com.hillel.cinema.domain.Client;
+import com.hillel.cinema.domain.Ticket;
 import com.hillel.cinema.service.TicketService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -27,14 +26,14 @@ public class TicketController {
 
     @GetMapping("/tickets/{id}")
     @ResponseStatus(HttpStatus.OK)
-    public Ticket getTicketById(@PathVariable Long id) throws EntityNotFoundException {
+    public Ticket getTicketById(@PathVariable Long id)  {
         return ticketService.getTicketById(id);
 
     }
 
     @GetMapping("/tickets/{client}")
     @ResponseStatus(HttpStatus.OK)
-    public Ticket getTicketById(@PathVariable Client client) throws EntityNotFoundException {
+    public Ticket getTicketById(@PathVariable Client client)  {
         return ticketService.getTicketByClient(client);
 
     }
@@ -48,7 +47,7 @@ public class TicketController {
 
     @PutMapping("/tickets/{id}")
     @ResponseStatus(HttpStatus.OK)
-    public Ticket updateTicketById(@PathVariable("id") Long id, @RequestBody Ticket ticket) throws EntityNotFoundException {
+    public Ticket updateTicketById(@PathVariable("id") Long id, @RequestBody Ticket ticket) {
         return ticketService.updateTicket(id, ticket);
     }
 

@@ -1,8 +1,10 @@
 package com.hillel.cinema.repository;
-import com.hillel.cinema.model.Movie;
+import com.hillel.cinema.domain.Movie;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.stereotype.Repository;
 
+@Repository
 public interface MovieRepository extends JpaRepository<Movie, Long> {
 
-    public Movie findMovieByTitle(String title);
+    Movie findMovieByTitle(String title);
 }

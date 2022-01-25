@@ -1,7 +1,6 @@
-package com.hillel.cinema.controller;
+package com.hillel.cinema.web;
 
-import com.hillel.cinema.exception.EntityNotFoundException;
-import com.hillel.cinema.model.Room;
+import com.hillel.cinema.domain.Room;
 import com.hillel.cinema.service.RoomService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -27,14 +26,14 @@ public class RoomController {
 
     @GetMapping("/rooms/{id}")
     @ResponseStatus(HttpStatus.OK)
-    public Room getRoomById(@PathVariable Long id) throws EntityNotFoundException {
+    public Room getRoomById(@PathVariable Long id)  {
         return roomService.getRoomById(id);
 
     }
 
     @GetMapping("/rooms/{room_number}")
     @ResponseStatus(HttpStatus.OK)
-    public Room getRoomByRoomNumber(@PathVariable int room_number) throws EntityNotFoundException {
+    public Room getRoomByRoomNumber(@PathVariable int room_number) {
         return roomService.getRoomByRoomNumber(room_number);
     }
 
@@ -47,7 +46,7 @@ public class RoomController {
 
     @PutMapping("/rooms/{id}")
     @ResponseStatus(HttpStatus.OK)
-    public Room updateRoomById(@PathVariable("id") Long id, @RequestBody Room room) throws EntityNotFoundException {
+    public Room updateRoomById(@PathVariable("id") Long id, @RequestBody Room room) {
         return roomService.updateRoom(id, room);
     }
 

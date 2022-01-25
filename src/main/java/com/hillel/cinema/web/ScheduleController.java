@@ -1,8 +1,7 @@
-package com.hillel.cinema.controller;
+package com.hillel.cinema.web;
 
-import com.hillel.cinema.exception.EntityNotFoundException;
-import com.hillel.cinema.model.Movie;
-import com.hillel.cinema.model.Schedule;
+import com.hillel.cinema.domain.Movie;
+import com.hillel.cinema.domain.Schedule;
 import com.hillel.cinema.service.ScheduleService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -29,22 +28,22 @@ public class ScheduleController {
 
     @GetMapping("/schedules/{id}")
     @ResponseStatus(HttpStatus.OK)
-    public Schedule getScheduleById(@PathVariable Long id) throws EntityNotFoundException {
+    public Schedule getScheduleById(@PathVariable Long id) {
         return scheduleService.getScheduleById(id);
 
     }
 
     @GetMapping("/schedules/{movie}")
     @ResponseStatus(HttpStatus.OK)
-    public Schedule getScheduleByMovie(@PathVariable Movie movie) throws EntityNotFoundException {
+    public Schedule getScheduleByMovie(@PathVariable Movie movie) {
         return scheduleService.getScheduleByMovie(movie);
 
     }
 
     @GetMapping("/schedules/{movie_time}")
     @ResponseStatus(HttpStatus.OK)
-    public Schedule getScheduleByMovieTime(@PathVariable LocalDateTime movie_time) throws EntityNotFoundException {
-        return scheduleService.getSchedulebyMovieTime(movie_time);
+    public Schedule getScheduleByMovieTime(@PathVariable LocalDateTime movie_time) {
+        return scheduleService.getScheduleByMovieTime(movie_time);
 
     }
 
@@ -57,7 +56,7 @@ public class ScheduleController {
 
     @PutMapping("/schedules/{id}")
     @ResponseStatus(HttpStatus.OK)
-    public Schedule updateScheduleById(@PathVariable("id") Long id, @RequestBody Schedule schedule) throws EntityNotFoundException {
+    public Schedule updateScheduleById(@PathVariable("id") Long id, @RequestBody Schedule schedule) {
         return scheduleService.updateSchedule(id, schedule);
     }
 

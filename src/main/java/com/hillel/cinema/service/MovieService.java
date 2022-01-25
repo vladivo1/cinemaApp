@@ -1,7 +1,6 @@
 package com.hillel.cinema.service;
 
-import com.hillel.cinema.exception.EntityNotFoundException;
-import com.hillel.cinema.model.Movie;
+import com.hillel.cinema.domain.Movie;
 import com.hillel.cinema.repository.MovieRepository;
 import org.springframework.stereotype.Service;
 
@@ -25,19 +24,19 @@ public class MovieService {
         return movieRepository.findAll();
     }
 
-    public Movie getMovieById(Long id) throws EntityNotFoundException {
+    public Movie getMovieById(Long id) {
         return movieRepository.findById(id)
-                .orElseThrow(() -> new EntityNotFoundException("Фильм с id " + id + " не найден"));
+                .orElseThrow(() -> new javax.persistence.EntityNotFoundException("Фильм с id " + id + " не найден"));
     }
 
-    public Movie getMovieByTitle(String title) throws EntityNotFoundException {
+    public Movie getMovieByTitle(String title)  {
         Movie movie = movieRepository.findMovieByTitle(title);
         if (title == null)
-            throw new EntityNotFoundException("Фильма с таким названием не существует!");
+            throw new  javax.persistence.EntityNotFoundException("Фильма с таким названием не существует!");
         return movie;
     }
 
-    public Movie updateMovieById(Long id, Movie movie) throws EntityNotFoundException {
+    public Movie updateMovieById(Long id, Movie movie)  {
         return movieRepository.findById(id)
                 .map(entity -> {
 
@@ -45,7 +44,7 @@ public class MovieService {
                     entity.setDescription(movie.getDescription());
                     return movieRepository.save(entity);
                 })
-                .orElseThrow(() -> new EntityNotFoundException("Фильм с id " + id + " не найден"));
+                .orElseThrow(() -> new javax.persistence.EntityNotFoundException("Фильм с id " + id + " не найден"));
 
     }
 

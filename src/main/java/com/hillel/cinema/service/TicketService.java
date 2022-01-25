@@ -1,8 +1,7 @@
 package com.hillel.cinema.service;
 
-import com.hillel.cinema.exception.EntityNotFoundException;
-import com.hillel.cinema.model.Client;
-import com.hillel.cinema.model.Ticket;
+import com.hillel.cinema.domain.Client;
+import com.hillel.cinema.domain.Ticket;
 import com.hillel.cinema.repository.TicketRepository;
 import org.springframework.stereotype.Service;
 
@@ -16,23 +15,27 @@ public class TicketService {
         this.ticketRepository = ticketRepository;
     }
 
-    public Ticket saveTicket(Ticket ticket){ return ticketRepository.save(ticket);}
-
-    public List<Ticket> getAllTickets(){ return ticketRepository.findAll();}
-
-    public Ticket getTicketById(Long id) throws EntityNotFoundException {
-        return ticketRepository.findById(id)
-                .orElseThrow(() -> new EntityNotFoundException("Билет с id " + id + " не найден"));
+    public Ticket saveTicket(Ticket ticket) {
+        return ticketRepository.save(ticket);
     }
 
-    public Ticket getTicketByClient(Client client) throws EntityNotFoundException{
+    public List<Ticket> getAllTickets() {
+        return ticketRepository.findAll();
+    }
+
+    public Ticket getTicketById(Long id)  {
+        return ticketRepository.findById(id)
+                .orElseThrow(() -> new javax.persistence.EntityNotFoundException("Билет с id " + id + " не найден"));
+    }
+
+    public Ticket getTicketByClient(Client client) {
         Ticket ticket = ticketRepository.getTicketByClient(client);
         if (client == null)
-            throw new EntityNotFoundException("Билет клиента не найден");
+            throw new javax.persistence.EntityNotFoundException("Билет клиента не найден");
         return ticket;
     }
 
-    public Ticket updateTicket(Long id,Ticket ticket) throws EntityNotFoundException {
+    public Ticket updateTicket(Long id,Ticket ticket)  {
         return ticketRepository.findById(id)
                 .map(entity ->{
 
@@ -41,11 +44,12 @@ public class TicketService {
                    entity.setDate(ticket.getDate());
                    entity.setMovieName(ticket.getMovieName());
                    entity.setRoom(ticket.getRoom());
-                   entity.setTime(ticket.getTime());
                     return ticketRepository.save(entity);
                 })
-                .orElseThrow(() -> new EntityNotFoundException("Билет с id " + id + " не найден"));
+                .orElseThrow(() -> new javax.persistence.EntityNotFoundException("Билет с id " + id + " не найден"));
     }
 
-    public void deleteTicket(Long id){ ticketRepository.deleteById(id); }
+    public void deleteTicket(Long id) {
+        ticketRepository.deleteById(id);
+    }
 }

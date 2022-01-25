@@ -1,7 +1,6 @@
-package com.hillel.cinema.controller;
+package com.hillel.cinema.web;
 
-import com.hillel.cinema.exception.EntityNotFoundException;
-import com.hillel.cinema.model.Movie;
+import com.hillel.cinema.domain.Movie;
 import com.hillel.cinema.service.MovieService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -27,14 +26,14 @@ public class MovieController {
 
     @GetMapping("/movies/{id}")
     @ResponseStatus(HttpStatus.OK)
-    public Movie getMovieById(@PathVariable Long id) throws EntityNotFoundException {
+    public Movie getMovieById(@PathVariable Long id) {
         return movieService.getMovieById(id);
 
     }
 
     @GetMapping("/movies/{title}")
     @ResponseStatus(HttpStatus.OK)
-    public Movie getMovieByTitle(@PathVariable String title) throws EntityNotFoundException {
+    public Movie getMovieByTitle(@PathVariable String title) {
         return movieService.getMovieByTitle(title);
     }
 
@@ -47,7 +46,7 @@ public class MovieController {
 
     @PutMapping("/movies/{id}")
     @ResponseStatus(HttpStatus.OK)
-    public Movie updateMovieById(@PathVariable("id") Long id, @RequestBody Movie movie) throws EntityNotFoundException {
+    public Movie updateMovieById(@PathVariable("id") Long id, @RequestBody Movie movie)  {
         return movieService.updateMovieById(id, movie);
     }
 

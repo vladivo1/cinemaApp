@@ -1,12 +1,10 @@
 package com.hillel.cinema.service;
 
-import com.hillel.cinema.exception.EntityAlreadyExistException;
-import com.hillel.cinema.exception.EntityNotFoundException;
-import com.hillel.cinema.model.Client;
+import com.hillel.cinema.domain.Client;
 import com.hillel.cinema.repository.ClientRepository;
 import org.springframework.stereotype.Service;
-
 import java.util.List;
+
 
 @Service
 public class ClientService {
@@ -17,12 +15,7 @@ public class ClientService {
         this.clientRepository = clientRepository;
     }
 
-    public Client saveClient(Client client) throws EntityAlreadyExistException {
-        if (clientRepository.findClientByEmail(client.getEmail()) != null)
-            throw new EntityAlreadyExistException("Пользователь с таким email уже существует");
-        else if (clientRepository.findClientByPhoneNumber(client.getPhoneNumber()) != null)
-            throw new EntityAlreadyExistException("Пользователь с таким номером телефона уже существует");
-         else
+    public Client saveClient(Client client) {
         return clientRepository.save(client);
     }
 
@@ -30,12 +23,12 @@ public class ClientService {
         return clientRepository.findAll();
     }
 
-    public Client getClientById(Long id) throws EntityNotFoundException {
+    public Client getClientById(Long id)  {
         return clientRepository.findById(id)
-                .orElseThrow(() -> new EntityNotFoundException("Пользователь с id  " + id + " не найден"));
+                .orElseThrow(() -> new javax.persistence.EntityNotFoundException("Пользователь с id  " + id + " не найден"));
     }
 
-    public Client updateClientById (Long id, Client client) throws EntityNotFoundException {
+    public Client updateClientById (Long id, Client client) {
         return clientRepository.findById(id)
                 .map(entity -> {
 
@@ -47,7 +40,7 @@ public class ClientService {
                         entity.setPhoneNumber(client.getPhoneNumber());
                         return clientRepository.save(entity);
                     })
-                .orElseThrow(() -> new EntityNotFoundException("Пользователь с id " + id +  " не найден"));
+                .orElseThrow(() -> new javax.persistence.EntityNotFoundException("Пользователь с id " + id +  " не найден"));
 
     }
 
