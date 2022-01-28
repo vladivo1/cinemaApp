@@ -7,7 +7,6 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.time.LocalDateTime;
 import java.util.List;
 
 @RestController
@@ -40,10 +39,10 @@ public class ScheduleController {
 
     }
 
-    @GetMapping("/schedules/{movie_time}")
+    @GetMapping("/schedules/{date}")
     @ResponseStatus(HttpStatus.OK)
-    public Schedule getScheduleByMovieTime(@PathVariable LocalDateTime movie_time) {
-        return scheduleService.getScheduleByMovieTime(movie_time);
+    public Schedule getScheduleByDate(@PathVariable String date) {
+        return scheduleService.getScheduleByDate(date);
 
     }
 

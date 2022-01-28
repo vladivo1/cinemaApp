@@ -36,9 +36,9 @@ public class ScheduleService {
         return schedule;
     }
 
-    public Schedule getScheduleByMovieTime(LocalDateTime movieTime) {
-        Schedule schedule = scheduleRepository.getScheduleByMovieTime(movieTime);
-        if (movieTime == null)
+    public Schedule getScheduleByDate(String date) {
+        Schedule schedule = scheduleRepository.getScheduleByDate(date);
+        if (date == null)
             throw new javax.persistence.EntityNotFoundException("Расписание по такому времени не найдено");
         return schedule;
     }

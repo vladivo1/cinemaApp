@@ -10,5 +10,5 @@ import java.time.LocalDateTime;
 public interface ScheduleRepository extends JpaRepository<Schedule, Long> {
 
     Schedule getScheduleByMovie (Movie movie);
-    Schedule getScheduleByMovieTime (LocalDateTime movieTime);
+    Schedule getScheduleByDate (String date);
 }
