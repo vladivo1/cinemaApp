@@ -4,8 +4,8 @@ import com.hillel.cinema.domain.Client;
 import com.hillel.cinema.domain.Ticket;
 import com.hillel.cinema.repository.TicketRepository;
 import org.springframework.stereotype.Service;
-
 import java.util.List;
+import javax.persistence.*;
 
 @Service
 public class TicketService {
@@ -25,13 +25,13 @@ public class TicketService {
 
     public Ticket getTicketById(Long id)  {
         return ticketRepository.findById(id)
-                .orElseThrow(() -> new javax.persistence.EntityNotFoundException("Билет с id " + id + " не найден"));
+                .orElseThrow(() -> new EntityNotFoundException("Билет с id " + id + " не найден"));
     }
 
     public Ticket getTicketByClient(Client client) {
         Ticket ticket = ticketRepository.getTicketByClient(client);
         if (client == null)
-            throw new javax.persistence.EntityNotFoundException("Билет клиента не найден");
+            throw new EntityNotFoundException("Билет клиента не найден");
         return ticket;
     }
 
@@ -46,7 +46,7 @@ public class TicketService {
                    entity.setRoom(ticket.getRoom());
                     return ticketRepository.save(entity);
                 })
-                .orElseThrow(() -> new javax.persistence.EntityNotFoundException("Билет с id " + id + " не найден"));
+                .orElseThrow(() -> new EntityNotFoundException("Билет с id " + id + " не найден"));
     }
 
     public void deleteTicket(Long id) {

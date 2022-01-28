@@ -3,6 +3,7 @@ package com.hillel.cinema.service;
 import com.hillel.cinema.domain.Movie;
 import com.hillel.cinema.repository.MovieRepository;
 import org.springframework.stereotype.Service;
+import javax.persistence.*;
 
 import java.util.List;
 
@@ -26,13 +27,13 @@ public class MovieService {
 
     public Movie getMovieById(Long id) {
         return movieRepository.findById(id)
-                .orElseThrow(() -> new javax.persistence.EntityNotFoundException("Фильм с id " + id + " не найден"));
+                .orElseThrow(() -> new EntityNotFoundException("Фильм с id " + id + " не найден"));
     }
 
     public Movie getMovieByTitle(String title)  {
         Movie movie = movieRepository.findMovieByTitle(title);
         if (title == null)
-            throw new  javax.persistence.EntityNotFoundException("Фильма с таким названием не существует!");
+            throw new EntityNotFoundException("Фильма с таким названием не существует!");
         return movie;
     }
 
@@ -44,7 +45,7 @@ public class MovieService {
                     entity.setDescription(movie.getDescription());
                     return movieRepository.save(entity);
                 })
-                .orElseThrow(() -> new javax.persistence.EntityNotFoundException("Фильм с id " + id + " не найден"));
+                .orElseThrow(() -> new EntityNotFoundException("Фильм с id " + id + " не найден"));
 
     }
 

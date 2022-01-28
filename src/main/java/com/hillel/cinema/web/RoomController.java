@@ -33,7 +33,7 @@ public class RoomController {
 
     @GetMapping("/rooms/{room_number}")
     @ResponseStatus(HttpStatus.OK)
-    public Room getRoomByRoomNumber(@PathVariable int room_number) {
+    public Room getRoomByRoomNumber(@PathVariable String room_number) {
         return roomService.getRoomByRoomNumber(room_number);
     }
 

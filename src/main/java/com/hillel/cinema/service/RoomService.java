@@ -3,6 +3,7 @@ package com.hillel.cinema.service;
 import com.hillel.cinema.domain.Room;
 import com.hillel.cinema.repository.RoomRepository;
 import org.springframework.stereotype.Service;
+import javax.persistence.*;
 
 import java.util.List;
 
@@ -25,13 +26,13 @@ public class RoomService {
 
     public Room getRoomById(Long id) {
         return roomRepository.findById(id)
-                .orElseThrow(() -> new javax.persistence.EntityNotFoundException("Зал с id " + id + " не найден"));
+                .orElseThrow(() -> new EntityNotFoundException("Зал с id " + id + " не найден"));
     }
 
-    public Room getRoomByRoomNumber(int roomNumber) {
+    public Room getRoomByRoomNumber(String roomNumber) {
         Room room = roomRepository.getRoomByRoomNumber(roomNumber);
         if (room == null)
-            throw new javax.persistence.EntityNotFoundException("Зала с таким номером не существует!");
+            throw new EntityNotFoundException("Зала с таким номером не существует!");
         return room;
     }
 
@@ -44,7 +45,7 @@ public class RoomService {
                     entity.setDescription(room.getDescription());
                     return roomRepository.save(entity);
                 })
-                .orElseThrow(() -> new javax.persistence.EntityNotFoundException("Зал с id " + id + " не найден"));
+                .orElseThrow(() -> new EntityNotFoundException("Зал с id " + id + " не найден"));
 
     }
 

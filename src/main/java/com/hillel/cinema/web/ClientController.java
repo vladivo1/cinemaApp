@@ -31,6 +31,20 @@ public class ClientController {
 
     }
 
+    @GetMapping("/clients/{email}")
+    @ResponseStatus(HttpStatus.OK)
+    public Client getClientByEmail(@PathVariable String email) {
+        return clientService.getClientByEmail(email);
+
+    }
+
+    @GetMapping("/clients/{phone_number}")
+    @ResponseStatus(HttpStatus.OK)
+    public Client getClientByPhoneNumber(@PathVariable String phone_number) {
+        return clientService.getClientByNumber(phone_number);
+
+    }
+
     @GetMapping("/clients")
     @ResponseStatus(HttpStatus.OK)
     public List<Client> getAllClients() {

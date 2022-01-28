@@ -4,6 +4,7 @@ import com.hillel.cinema.domain.Client;
 import com.hillel.cinema.repository.ClientRepository;
 import org.springframework.stereotype.Service;
 import java.util.List;
+import javax.persistence.*;
 
 
 @Service
@@ -25,7 +26,16 @@ public class ClientService {
 
     public Client getClientById(Long id)  {
         return clientRepository.findById(id)
-                .orElseThrow(() -> new javax.persistence.EntityNotFoundException("Пользователь с id  " + id + " не найден"));
+                .orElseThrow(() -> new EntityNotFoundException("Пользователь с id  " + id + " не найден"));
+    }
+
+    public Client getClientByEmail (String email) {
+        return clientRepository.findClientByEmail(email);
+
+    }
+
+    public Client getClientByNumber (String phoneNumber) {
+        return clientRepository.findClientByPhoneNumber(phoneNumber);
     }
 
     public Client updateClientById (Long id, Client client) {
@@ -40,7 +50,7 @@ public class ClientService {
                         entity.setPhoneNumber(client.getPhoneNumber());
                         return clientRepository.save(entity);
                     })
-                .orElseThrow(() -> new javax.persistence.EntityNotFoundException("Пользователь с id " + id +  " не найден"));
+                .orElseThrow(() -> new EntityNotFoundException("Пользователь с id " + id +  " не найден"));
 
     }
 

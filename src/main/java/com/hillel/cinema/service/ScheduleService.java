@@ -4,9 +4,8 @@ import com.hillel.cinema.domain.Movie;
 import com.hillel.cinema.domain.Schedule;
 import com.hillel.cinema.repository.ScheduleRepository;
 import org.springframework.stereotype.Service;
-
-import java.time.LocalDateTime;
 import java.util.List;
+import javax.persistence.*;
 
 @Service
 public class ScheduleService {
@@ -26,20 +25,20 @@ public class ScheduleService {
 
     public Schedule getScheduleById(Long id) {
         return scheduleRepository.findById(id)
-                .orElseThrow(() -> new javax.persistence.EntityNotFoundException("Расписание с id " + id + " не найдено"));
+                .orElseThrow(() -> new EntityNotFoundException("Расписание с id " + id + " не найдено"));
     }
 
     public Schedule getScheduleByMovie(Movie movie) {
         Schedule schedule = scheduleRepository.getScheduleByMovie(movie);
         if (movie == null)
-            throw new javax.persistence.EntityNotFoundException("Расписание с таким фильмом не найдено");
+            throw new EntityNotFoundException("Расписание с таким фильмом не найдено");
         return schedule;
     }
 
     public Schedule getScheduleByDate(String date) {
         Schedule schedule = scheduleRepository.getScheduleByDate(date);
         if (date == null)
-            throw new javax.persistence.EntityNotFoundException("Расписание по такому времени не найдено");
+            throw new EntityNotFoundException("Расписание по такому времени не найдено");
         return schedule;
     }
 
@@ -52,7 +51,7 @@ public class ScheduleService {
                     entity.setRoom(schedule.getRoom());
                     return scheduleRepository.save(entity);
                 })
-                .orElseThrow(() -> new javax.persistence.EntityNotFoundException("Расписание с id " + id + " не найдено"));
+                .orElseThrow(() -> new EntityNotFoundException("Расписание с id " + id + " не найдено"));
     }
 
     public void deleteSchedule(Long id) {
