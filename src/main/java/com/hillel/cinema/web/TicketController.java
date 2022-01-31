@@ -1,6 +1,6 @@
 package com.hillel.cinema.web;
 
-import com.hillel.cinema.domain.Client;
+import com.hillel.cinema.domain.User;
 import com.hillel.cinema.domain.Ticket;
 import com.hillel.cinema.service.TicketService;
 import org.springframework.http.HttpStatus;
@@ -31,10 +31,10 @@ public class TicketController {
 
     }
 
-    @GetMapping("/tickets/{client}")
+    @GetMapping("/tickets/{user}")
     @ResponseStatus(HttpStatus.OK)
-    public Ticket getTicketById(@PathVariable Client client)  {
-        return ticketService.getTicketByClient(client);
+    public Ticket getTicketById(@PathVariable User user)  {
+        return ticketService.getTicketByUser(user);
 
     }
 
