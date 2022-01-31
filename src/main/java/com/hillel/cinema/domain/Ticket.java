@@ -26,7 +26,7 @@ public class Ticket {
     private String room;
 
     @ManyToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "client_id", referencedColumnName = "clientId")
-    private Client client;
+    @JoinColumn(name = "user_id", referencedColumnName = "userId")
+    private User user;
 
 }

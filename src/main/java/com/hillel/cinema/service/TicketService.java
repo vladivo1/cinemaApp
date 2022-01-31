@@ -1,19 +1,16 @@
 package com.hillel.cinema.service;
 
-import com.hillel.cinema.domain.Client;
+import com.hillel.cinema.domain.User;
 import com.hillel.cinema.domain.Ticket;
 import com.hillel.cinema.repository.TicketRepository;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import java.util.List;
 import javax.persistence.*;
 
-@Service
+@Service @RequiredArgsConstructor
 public class TicketService {
     private final TicketRepository ticketRepository;
-
-    public TicketService(TicketRepository ticketRepository) {
-        this.ticketRepository = ticketRepository;
-    }
 
     public Ticket saveTicket(Ticket ticket) {
         return ticketRepository.save(ticket);
@@ -28,9 +25,9 @@ public class TicketService {
                 .orElseThrow(() -> new EntityNotFoundException("Билет с id " + id + " не найден"));
     }
 
-    public Ticket getTicketByClient(Client client) {
-        Ticket ticket = ticketRepository.getTicketByClient(client);
-        if (client == null)
+    public Ticket getTicketByUser(User user) {
+        Ticket ticket = ticketRepository.getTicketByUser(user);
+        if (user == null)
             throw new EntityNotFoundException("Билет клиента не найден");
         return ticket;
     }
@@ -39,7 +36,7 @@ public class TicketService {
         return ticketRepository.findById(id)
                 .map(entity ->{
 
-                   entity.setClient(ticket.getClient());
+                   entity.setUser(ticket.getUser());
                    entity.setCost(ticket.getCost());
                    entity.setDate(ticket.getDate());
                    entity.setMovieName(ticket.getMovieName());
